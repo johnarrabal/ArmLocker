@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.projetoarmario.databinding.ActivityMainBinding
 
+// Activity principal que exibe a tela inicial
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -22,11 +23,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Configura o botão de login para abrir a LoginActivity
         binding.buttonLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
+        // Configura o botão de registro para abrir a RegisterActivity
         binding.buttonRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

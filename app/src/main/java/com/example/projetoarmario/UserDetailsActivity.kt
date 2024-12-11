@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projetoarmario.databinding.ActivityUserDetailsBinding
 
+// Activity para exibir os detalhes do usuário
 class UserDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserDetailsBinding
     private lateinit var databaseHelper: DatabaseHelper
@@ -19,6 +20,7 @@ class UserDetailsActivity : AppCompatActivity() {
         if (email != null) {
             val cursor = databaseHelper.getUserDetails(email)
             if (cursor.moveToFirst()) {
+                // Preenche os campos de texto com os detalhes do usuário
                 binding.textViewFirstName.text = cursor.getString(cursor.getColumnIndexOrThrow("first_name"))
                 binding.textViewLastName.text = cursor.getString(cursor.getColumnIndexOrThrow("last_name"))
                 binding.textViewBirthDate.text = cursor.getString(cursor.getColumnIndexOrThrow("birth_date"))

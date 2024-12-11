@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+// Classe que auxilia na criação e gerenciamento do banco de dados SQLite
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
@@ -26,6 +27,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_PHONE = "phone"
     }
 
+    // Método chamado quando o banco de dados é criado pela primeira vez
     override fun onCreate(db: SQLiteDatabase) {
         val createTable = ("CREATE TABLE $TABLE_NAME ("
                 + "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -43,11 +45,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL(createTable)
     }
 
+    // Método chamado quando o banco de dados precisa ser atualizado
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
+    // Método para adicionar um novo usuário ao banco de dados
     fun addUser(firstName: String, lastName: String, email: String, password: String, birthDate: String, cpf: String, cep: String, street: String, city: String, state: String, phone: String): Long {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -65,6 +69,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db.insert(TABLE_NAME, null, values)
     }
 
+    // Método para verificar se um usuário existe no banco de dados com o email e senha fornecidos
     fun checkUser(email: String, password: String): Boolean {
         val db = this.readableDatabase
         val cursor = db.query(TABLE_NAME, arrayOf(COLUMN_ID), "$COLUMN_EMAIL=? AND $COLUMN_PASSWORD=?", arrayOf(email, password), null, null, null)
@@ -73,6 +78,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return count > 0
     }
 
+    // Método para obter os detalhes de um usuário com base no email fornecido
     fun getUserDetails(email: String): Cursor {
         val db = this.readableDatabase
         return db.query(TABLE_NAME, null, "$COLUMN_EMAIL=?", arrayOf(email), null, null, null)

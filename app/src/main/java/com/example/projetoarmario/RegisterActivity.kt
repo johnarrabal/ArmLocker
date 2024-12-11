@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projetoarmario.databinding.ActivityRegisterBinding
 
+// Activity para gerenciar a tela de registro de novos usuários
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var databaseHelper: DatabaseHelper
@@ -16,6 +17,7 @@ class RegisterActivity : AppCompatActivity() {
 
         databaseHelper = DatabaseHelper(this)
 
+        // Configura o botão de registro para adicionar um novo usuário ao banco de dados
         binding.buttonRegister.setOnClickListener {
             val firstName = binding.editTextFirstName.text.toString()
             val lastName = binding.editTextLastName.text.toString()

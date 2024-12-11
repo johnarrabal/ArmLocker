@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProjetoArmario</string>
+    <string name="welcome_message">Bem vindo, %1$s</string>
 </resources>
